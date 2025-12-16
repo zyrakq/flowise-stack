@@ -1,0 +1,8 @@
+services:
+  flowise:
+    networks:
+      - flowise-workspace-network
+
+networks:
+  flowise-workspace-network:
+    external: true

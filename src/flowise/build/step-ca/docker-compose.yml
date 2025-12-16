@@ -1,0 +1,25 @@
+services:
+  flowise:
+    container_name: flowise
+    image: flowiseai/flowise
+    restart: unless-stopped
+    environment:
+      PORT: ${PORT:-3001}
+      VIRTUAL_PORT: ${VIRTUAL_PORT}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${LETSENCRYPT_HOST}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+    volumes:
+      - flowise-data:/root/.flowise
+    entrypoint: /bin/sh -c "sleep 3; flowise start"
+    networks:
+      - flowise-network
+      - step-ca-network
+volumes:
+  flowise-data:
+    name: flowise-data
+networks:
+  flowise-network:
+    name: flowise-network
+  step-ca-network:
+    external: true

@@ -1,0 +1,4 @@
+services:
+  flowise:
+    ports:
+      - ${PORT:-3001}:${PORT:-3001}

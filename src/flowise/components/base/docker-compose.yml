@@ -1,0 +1,20 @@
+services:
+  flowise:
+    container_name: flowise
+    image: flowiseai/flowise
+    restart: unless-stopped
+    environment:
+      PORT: ${PORT:-3001}      
+    volumes:
+        - flowise-data:/root/.flowise
+    entrypoint: /bin/sh -c "sleep 3; flowise start"
+    networks:
+      - flowise-network
+
+volumes:
+  flowise-data:
+    name: flowise-data
+
+networks:
+  flowise-network:
+    name: flowise-network
